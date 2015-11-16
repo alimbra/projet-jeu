@@ -16,7 +16,7 @@ Coordonnee::Coordonnee(const Coordonnee &c){
 	repereX=c.repereX;
 	repereY=c.repereY;
 }
-
+//Coordonnee
 
 
 int Coordonnee::getX(){
