@@ -486,3 +486,13 @@ void dessiner(DrawingWindow &w){
 	   }
 	  }
 }
+
+int main(int argc, char *argv[])
+{
+	QApplication application (argc, argv);
+	DrawingWindow ismail(dessiner, 800, 680);
+	srand(time(NULL));
+	ismail.setWindowTitle("jeu ");
+	ismail.show();
+	return application.exec();
+}
