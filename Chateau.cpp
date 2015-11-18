@@ -67,22 +67,52 @@ char* Chateau::getCouleurP(){
 	return this->CouleurP;
 }
 /*
- *
  *dessiner le chateau 
- *
  */
 void Chateau::dessinerChateau(DrawingWindow &w){
-	/*w.setColor(this->getCouleurCh());	
-	w.fillRect(this->getCoordonneX().getX(),this->getCoordonneX().getY(),this->getCoordonneY().getX(),this->getCoordonneY().getY());
-	w.setColor(this->getCouleurP());
-  w.fillRect(this->getCoordonneXP().getX(),this->getCoordonneXP().getY(),this->getCoordonneYP().getX(),this->getCoordonneYP().getY());   
-  w.setColor("dodgerblue");
-  //dessiner la tour
-  w.setColor(this->getCouleurCh()); 
-  w.fillRect(this->getCoordonneX().getX(),
-            this->getCoordonneX().getY()-0.2*this->getCoordonneX().getY(),
-            0.3*this->getCoordonneY().getX(),
-            this->getCoordonneY().getY());
-  */
+    w.setColor(this->getCouleurCh());    
+    w.fillRect(x.getX(),
+            x.getY(),
+            y.getX(),
+            y.getY()
+  );
+    
+  w.setColor(this->getCouleurP());
+  w.fillRect(xp.getX()
+    ,xp.getY()
+    ,yp.getX()
+    ,yp.getY()
+  );
+
+  w.setColor(this->getCouleurCh());   
+  w.fillRect(
+    x.getX(),
+    x.getY()-largeur,
+    xp.getX(),
+    x.getY()
+  );
+  w.setColor(this->getCouleurCh());
+  w.fillRect(
+    yp.getX(),
+    x.getY()-largeur,
+    y.getX(),
+    y.getY()
+  );
+
+  // contour de la porte
+  w.setColor("black");
+  w.drawLine(xp.getX(),xp.getY(),
+    xp.getX(),yp.getY());
+  
+  w.drawLine(xp.getX(),xp.getY(),
+    yp.getX(),xp.getY());
+  w.drawLine(yp.getX(),xp.getY(),
+    yp.getX(),yp.getY());
+  w.drawLine(xp.getX()+3+longeurPorte/2,xp.getY(),
+    xp.getX()+3+longeurPorte/2,yp.getY());  
+
+} 
+
+
 } 
   
