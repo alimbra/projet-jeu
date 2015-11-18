@@ -334,5 +334,155 @@ void dessiner(DrawingWindow &w){
 	   }
 	  }
  else
-	  {}
+	  {
+	  	// Lecture de la force et de l'angle de trajectoire du boulet
+      	   cout<<endl<<"Joueur 2 - Entrez une force : ";
+           cin>>force;
+           cout<<"Joueur 2 - Entrez un angle : ";
+           cin>>angle;
+           cout<<endl;
+
+	   // Conversion de l'angle en radians
+           angle=angle/180*M_PI;
+
+	   // Coordonnées initiales du boulet
+   
+           xt=chateau.getCoordonneX().getX()-cx/2;
+     	   yt=chateau.getCoordonneX().getY()-cy/2;
+      	   // Calcul de la vitesse initiale du boulet
+      	   vx=ceil(force*cos(angle));
+           vy=ceil(force*sin(angle));
+
+     	   // Affichage du boulet à ses coordonées initiales
+      	   w.setColor("black");
+      	   w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 3);
+
+	   // Calcul et affichage de la trajectoire du boulet
+      	   while((yt>0)&&(xt<cx+4))
+           {
+            w.setColor("dodgerblue");
+            w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 3);
+            vr=sqrt((vx+wind)*(vx+wind)+vy*vy);
+            ax=-k*vr*(vx+wind);
+            ay=-k*vr*vy-g;
+            vx=vx+ax*dt;
+            vy=vy+ay*dt;
+            xt=(xt+vx*dt);
+            yt=(yt+vy*dt);
+            w.setColor("black");
+            w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 3);
+            w.usleep(100);
+            // Détection de la terre
+            if ((int)-yt+cy==cy-cy/8 )
+	   	 	{
+	    	 w.setColor("dodgerblue");
+	    	 w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 15);
+	     	 yt=0;
+	    	}
+
+	   //Detection de la colline
+            if(((w.getPointColor((int)sqrt(xt*xt)+3
+		,(int)-yt+cy+3)))==0xff008000)
+	    {
+	     w.setColor("dodgerblue");
+   	     w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 15);
+	     yt=0;
+	    }
+	   //Detection de la couleur darkslategray du  chateau
+             if(((w.getPointColor(cx-(int)sqrt(xt*xt)+3,
+	    (int)-yt+cy+3)))==0xff2f4f4f)
+	    {
+	     w.setColor("yellow");
+	     for(int ka=1;ka<=30;ka++)
+	     {
+	      w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy,ka);
+	      w.msleep(70);
+	     }
+	     w.setColor("dodgerblue");
+	     w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 50);
+	     yt=0;
+ 	     w.setColor("black");
+	     if(cx-(int)sqrt(xt*xt)>cx/2)
+	     {
+	     w.drawText(cx/2-40,cy/2-280,"Suicide !");
+	     joueur1=false;
+	     victoire=true;
+	      int nombreR=0;
+	      cout<<"cliquez sur 1 pour recommencer ?";
+	      cin>>nombreR;
+	      if (nombreR==1)
+	      {
+	      	dessiner(w);
+	      }
+	     }
+	     else
+	     {
+	      w.drawText(cx/2-40,cy/2-280,
+		"joueur 2 vous avez gagne !");
+	      joueur1=false;
+	      victoire=true;
+	      int nombreR=0;
+	     cout<<"cliquez sur 1 pour recommencer ?";
+	     cin>>nombreR;
+	     if (nombreR==1)
+	     {
+	      dessiner(w);
+	     }
+	     }
+	    }
+	    //detection de la couleur dimgray des 2 chateaux
+	    if(((w.getPointColor(cx-(int)sqrt(xt*xt)+3,
+		(int)-yt+cy+3)))==0xff696969)
+	    {
+	     w.setColor("yellow");
+	     for(int wi4=1;wi4<=20;wi4++)
+	     {
+	      w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, wi4);
+	      w.msleep(100);
+	     }
+             w.setColor("dodgerblue");
+	     w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 20);
+	     yt=0;
+	     if(cx-(int)sqrt(xt*xt)>cx/2)
+	     {
+	      w.setColor("black");
+	      w.drawText(cx/2-40,cy/2-280,"Suicide !");
+	      joueur1=false;
+	      victoire=true;
+	       int nombreR=0;
+	      cout<<"cliquez sur 1 pour recommencer ?";
+	      cin>>nombreR;
+	      if (nombreR==1)
+	      {
+	      	dessiner(w);
+	      }
+	     }
+	     else
+	     {
+	      w.setColor("black");
+	      w.drawText(cx/2-40,cy/2-280,
+		"joueur 2 vous avez gagne !");
+	      victoire=true;
+	         int nombreR=0;
+	     cout<<"cliquez sur 1 pour recommencer ?";
+	     cin>>nombreR;
+	     if (nombreR==1)
+	     {
+	      dessiner(w);
+	     }
+	      }
+	     }
+	    }
+           }
+
+     //le tour de role
+	   if (joueur1==true)
+	   {
+	    joueur1=false;
+	   }
+	   else
+	   {
+	    joueur1=true;
+	   }
+	  }
 }

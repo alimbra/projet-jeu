@@ -10,13 +10,11 @@
 using namespace std;
 
 
-Chateau::Chateau(const Coordonnee &c1,
-				const Coordonnee &c2,
-				const Coordonnee &cp1,
-                const Coordonnee &cp2,
-                float loc,float lac,
-                float lap,float lop,
-                const char * cc,const char * cp)
+Chateau::Chateau(const Coordonnee &c1,const Coordonnee &c2,const Coordonnee &cp1,
+                  const Coordonnee &cp2,
+                  float loc,float lac,
+                  float lap,float lop,
+                  const char * cc,const char * cp)
 {  
   x=Coordonnee(c1);
   y=Coordonnee(c2);
