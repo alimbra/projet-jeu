@@ -1,17 +1,17 @@
-300 : Longeur de la colline
-250 : Largeur de la colline
-200 : Abscisse du premier chateau
-120 : Longeur du premier chateau
+250 : Longeur de la colline
+150 : Largeur de la colline
+-320 : Abscisse du premier chateau
+150 : Longeur du premier chateau
 50 : Largeur du premier chateau
--320 : Abscisse du second chateau
+200 : Abscisse du second chateau
 120 : Longeur du second chateau
 50 : Largeur du second chateau
-230 : Abscisse la premiere porte
-50 : Longeur de la premiere porte
-30 : Largeur de la premiere porte
-230 : Abscisse la second  porte
-30 : Longeur de la second porte
-50 : Largeur de la second porte
+-290 : Abscisse la premiere porte
+100 : Longeur de la premiere porte
+40 : Largeur de la premiere porte
+230 : Abscisse la second porte
+60 : Longeur de la second porte
+40 : Largeur de la second porte
 
 
 
