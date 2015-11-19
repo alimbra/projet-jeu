@@ -2,7 +2,7 @@
 #include "string.h"
 
 #include "Colline.h"
-
+#include "sstream"
 #include <stdlib.h>
 #include <stdio.h>
 #include <algorithm>
@@ -18,19 +18,15 @@ std::vector<int> lireFichier() {
 
         string ligne;
         int nombre; // on stocke le nombre
-
         monFlux >> nombre;
         tab.push_back(nombre);
-        //cout << nombre << endl;
-
-        while(getline(monFlux, ligne)) { //Tant qu'on n'est pas à la fin, on lit
+        while(getline(monFlux, ligne)) { //Tant qu'on n'est pas Ã  la fin, on lit
 
                 monFlux >> nombre;
                 tab.push_back(nombre);
-               // cout << nombre << endl;
                 //Et on l'affiche dans la console
                 //Ou alors on fait quelque chose avec cette ligne
-                //À vous de voir
+                //Ã€ vous de voir
        }
     } else {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
@@ -115,7 +111,7 @@ void dessiner(DrawingWindow &w){
 	}
 	//creation du jeu
 
-	// Définition des variables et des constantes
+	// DÃ©finition des variables et des constantes
 	float vx, vy , ax, ay, vr, xt, yt, angle, force;
   	const float  k=0.005;
   	const float g=9.81;
@@ -158,12 +154,12 @@ void dessiner(DrawingWindow &w){
 	  vx=ceil(force*cos(angle));
       vy=ceil(force*sin(angle));
 
-	  // Coordonnées initiales du boulet
+	  // CoordonnÃ©es initiales du boulet
       xt=chateau1.getCoordonneY().getX();
       yt=chateau1.getCoordonneX().getY()-cy/2;
       //yt=110;
 
-	  // Affichage du boulet à ses coordonées initiales
+	  // Affichage du boulet Ã  ses coordonÃ©es initiales
  	  w.setColor("black");
   	  w.fillCircle(xt, (int)-yt+cy, 3);
 
@@ -183,7 +179,7 @@ void dessiner(DrawingWindow &w){
 	   w.fillCircle((int)sqrt(xt*xt), (int)-yt+cy, 3);
 	   w.usleep(100);
 
-	   // Détection de la terre
+	   // DÃ©tection de la terre
 
        if ((int)-yt+cy==cy-cy/8)
 	   {
@@ -320,7 +316,7 @@ void dessiner(DrawingWindow &w){
 	     {
 	      w.setColor("black");
 	      w.drawText(cx/2-40,cy/2-280,
-			"joueur 1 vous avez gagné");
+			"joueur 1 vous avez gagnÃ©");
 	      victoire=true;
 	       int nombreR=0;
 	      cout<<"cliquez sur 1 pour recommencer ?";
@@ -345,7 +341,7 @@ void dessiner(DrawingWindow &w){
 	   // Conversion de l'angle en radians
            angle=angle/180*M_PI;
 
-	   // Coordonnées initiales du boulet
+	   // CoordonnÃ©es initiales du boulet
    
            xt=chateau.getCoordonneX().getX()-cx/2;
      	   yt=chateau.getCoordonneX().getY()-cy/2;
@@ -353,7 +349,7 @@ void dessiner(DrawingWindow &w){
       	   vx=ceil(force*cos(angle));
            vy=ceil(force*sin(angle));
 
-     	   // Affichage du boulet à ses coordonées initiales
+     	   // Affichage du boulet Ã  ses coordonÃ©es initiales
       	   w.setColor("black");
       	   w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 3);
 
@@ -372,7 +368,7 @@ void dessiner(DrawingWindow &w){
             w.setColor("black");
             w.fillCircle(cx-(int)sqrt(xt*xt), (int)-yt+cy, 3);
             w.usleep(100);
-            // Détection de la terre
+            // DÃ©tection de la terre
             if ((int)-yt+cy==cy-cy/8 )
 	   	 	{
 	    	 w.setColor("dodgerblue");
@@ -490,6 +486,49 @@ void dessiner(DrawingWindow &w){
 int main(int argc, char *argv[])
 {
 	QApplication application (argc, argv);
+	//test des donnÃ©es et des valeurs
+	
+    ifstream monFlux("monFichier.txt");
+	if(monFlux) {
+
+        string ligne;
+        char a; // on stocke un charc
+        monFlux.get(a);
+     	while( a != ' '){
+            if ((int)a>=48 && (int)a<=57 || (int)a==45)
+            {                
+            }
+            else
+            {
+                cout<<"ERREUR de donnÃ©es"<<endl;
+                return 0;
+            }     
+            monFlux.get(a);
+        }
+
+      
+
+        while(getline(monFlux, ligne)) { //Tant qu'on n'est pas Ã  la fin, on lit
+            monFlux.get(a);    
+            while( a != ' '){
+                if ((int)a>=48 && (int)a<=57 || (int)a==45)
+                {                
+                }
+                else
+                {
+                    cout<<"ERREUR de donnÃ©es"<<endl;
+                    return 0;
+                }     
+                monFlux.get(a);
+            }
+            
+
+        }
+    } else {
+        cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
+        return 0;
+    }
+
 	DrawingWindow ismail(dessiner, 800, 680);
 	srand(time(NULL));
 	ismail.setWindowTitle("jeu ");
